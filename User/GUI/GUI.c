@@ -31,7 +31,7 @@ static void chang_to_menu(lv_event_t * e);
 static void chang_to_app1(lv_event_t * e);
 static void chang_to_app2(lv_event_t * e);
 static void app2_event_cb(lv_event_t * e);
-
+static void close_rgb(lv_event_t * e);
 
 //要添加APP界面的话在这里加屏幕比如 SCREEN_APP3
 typedef enum
@@ -204,6 +204,7 @@ static void APP1_Screen_Init(void)
 		//创建退出按钮
 		lv_obj_t * btn_esc = lv_btn_create(lv_scr_act());
 		lv_obj_add_event_cb(btn_esc, chang_to_menu, LV_EVENT_CLICKED, NULL);
+		lv_obj_add_event_cb(btn_esc, close_rgb, LV_EVENT_CLICKED, NULL);
 		lv_obj_set_pos(btn_esc,10,10);
 		
 		lv_obj_t * label = lv_label_create(btn_esc);
@@ -293,4 +294,9 @@ static void app2_event_cb(lv_event_t * e)
     cnt++;
 }
 
-
+static void close_rgb(lv_event_t * e)
+{
+	TIM10->CCR1 = 0;
+	TIM11->CCR1 = 0;
+	TIM13->CCR1 = 0;
+}
