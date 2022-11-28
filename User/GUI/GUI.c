@@ -46,15 +46,7 @@ struct{
 	Screen_Type next_screen;
 }screen_state;
 
-//菜单屏幕
-static lv_obj_t * menu_scr;
-//APP1屏幕
-static lv_obj_t * app1_scr;
-//APP2屏幕
-static lv_obj_t * app2_scr;
-////APP3屏幕
-//static lv_obj_t * app3_scr;
-//...
+
 /**********************
  *      MACROS
  **********************/
@@ -69,7 +61,7 @@ static lv_obj_t * app2_scr;
 void Menu_Init(void)
 {
 	lv_obj_t * menu_scr = lv_obj_create(NULL);
-	lv_scr_load(menu_scr); 
+	lv_scr_load_anim(menu_scr,LV_SCR_LOAD_ANIM_NONE,0,0,true); 
 	
 	//设置背景
 	lv_obj_t * bg_top;
@@ -121,20 +113,6 @@ void Change_Screen(void)
 			APP2_Screen_Init();			
 		}
 		
-		//删除原来的屏幕
-		if(screen_state.current_screen == SCREEN_MENU)
-		{
-			lv_obj_del(menu_scr);
-		}		
-		else if(screen_state.current_screen == SCREEN_APP1)
-		{
-			lv_obj_del(app1_scr);
-		}
-		else if(screen_state.current_screen == SCREEN_APP2)
-		{
-			lv_obj_del(app2_scr);
-		}
-		
 		screen_state.current_screen = screen_state.next_screen;
 	}
 }
@@ -146,7 +124,7 @@ void Change_Screen(void)
 static void APP1_Screen_Init(void)
 {
 		lv_obj_t * app1_scr = lv_obj_create(NULL);
-		lv_scr_load(app1_scr); 
+		lv_scr_load_anim(app1_scr,LV_SCR_LOAD_ANIM_NONE,0,0,true); 
 	
 		/*RED LED*/
 	  /*Create a slider of red LED*/
@@ -218,7 +196,7 @@ static void APP1_Screen_Init(void)
 static void APP2_Screen_Init(void)
 {
 	lv_obj_t * app2_scr = lv_obj_create(NULL);
-	lv_scr_load(app2_scr); 
+	lv_scr_load_anim(app2_scr,LV_SCR_LOAD_ANIM_NONE,0,0,true); 
 	
 	lv_obj_t * btn = lv_btn_create(lv_scr_act());
 	lv_obj_set_size(btn, 100, 50);
